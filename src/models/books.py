@@ -1,0 +1,18 @@
+import datetime
+from typing import Optional
+
+from .mixins import BookIdMixin
+
+
+class ShortBook(BookIdMixin):
+    title: str
+    author: str
+
+
+class Book(ShortBook):
+    year: datetime.datetime
+    pages: Optional[int]
+    published_by: Optional[str] = None
+    description: Optional[str] = None
+    download_links: list[dict[str: str]]  # extension:link
+    # tor_link: dict[str: str] # extension:link
