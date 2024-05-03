@@ -48,7 +48,7 @@ async def get_book(
     book_id: UUID,
     book_service: BookServiceABC = Depends(get_book_service),
 ) -> Book:
-    book = await book_service.get_book(book_id)
+    book = await book_service.get_book_by_id(book_id)
     if not book:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="book not found"
@@ -73,7 +73,7 @@ async def download_book(
     book_id: UUID,
     book_service: BookServiceABC = Depends(get_book_service),
 ) -> Book:
-    book = await book_service.download_book(book_id)
+    book = await book_service.download_book_by_id(book_id)
     if not book:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="book not found"
