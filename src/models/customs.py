@@ -21,10 +21,6 @@ class BookSortOptionEnum(str, Enum):
 class BookSortType(BaseModel):
     sort_type: BookSortTypeEnum = BookSortTypeEnum.title
 
-    # def __init__(self, **data):
-    #     super().__init__(**data)
-    #     self.search_type.value.lower()
-
 
 class BookSortOption(BaseModel):
     sort_option: BookSortOptionEnum = BookSortOptionEnum.asc
