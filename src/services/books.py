@@ -1,8 +1,9 @@
 from functools import lru_cache
 from uuid import UUID
 
+from core.pagination import PaginateQueryParams
 from models.books import Book, ShortBook
-from models.customs import BookSearchType
+from models.customs import BookSortOption, BookSortType
 
 from .abract import BookServiceABC
 
@@ -15,9 +16,11 @@ class BookService(BookServiceABC):
 
     async def search_book(
         self,
-        search_type: BookSearchType,
-        query: str,
-        sort: BookSearchType | None = None,
+        author: str | None,
+        title: str | None,
+        pagination: PaginateQueryParams,
+        sort: BookSortType | None = None,
+        sort_option: BookSortOption | None = None,
     ) -> list[ShortBook]:
         pass
 

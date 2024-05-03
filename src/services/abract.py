@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from uuid import UUID
 
 from models.books import Book, ShortBook
-from models.customs import BookSearchType
+from models.customs import BookSortOption, BookSortType
 
 
 class BookServiceABC(ABC):
@@ -10,9 +10,10 @@ class BookServiceABC(ABC):
     @abstractmethod
     async def search_book(  # noqa: E704
         self,
-        search_type: BookSearchType,
-        query: str,
-        sort: BookSearchType | None = None,
+        author: str | None,
+        title: str | None,
+        sort: BookSortType | None = None,
+        sort_option: BookSortOption | None = None,
     ) -> list[ShortBook]: ...
 
     @abstractmethod

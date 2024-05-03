@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from core.pagination import PaginateQueryParams
 from models.books import Book, ShortBook
-from models.customs import BookSearchType
+from models.customs import BookSortOption, BookSortType
 from services.abract import BookServiceABC
 from services.books import get_book_service
 
@@ -21,14 +21,15 @@ router = APIRouter()
     },
 )
 async def search_book(
-    search_type: BookSearchType,
-    query: str = "",
-    sort: BookSearchType | None = None,
+    author: str | None,
+    title: str | None,
     pagination: PaginateQueryParams = Depends(PaginateQueryParams),
+    sort: BookSortType | None = None,
+    sort_option: BookSortOption | None = None,
     book_service: BookServiceABC = Depends(get_book_service),
 ) -> list[ShortBook]:
     # Полнотекстовый поиск ????
-    return await book_service.search_book(search_type, query)
+    return await book_service.search_book(author, title, pagination, sort, sort_option)
 
 
 @router.get(

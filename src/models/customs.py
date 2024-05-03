@@ -6,14 +6,25 @@ from pydantic import BaseModel, StringConstraints
 Extension = Annotated[str, StringConstraints(pattern=r"\.*")]
 
 
-class BookSearchTypeEnum(str, Enum):
+class BookSortTypeEnum(str, Enum):
     author = "author"
     title = "title"
+    pages = "pages"
+    year = "year"
 
 
-class BookSearchType(BaseModel):
-    search_type: BookSearchTypeEnum = BookSearchTypeEnum.title
+class BookSortOptionEnum(str, Enum):
+    asc = "asc"
+    desc = "desc"
 
-    def __init__(self, **data):
-        super().__init__(**data)
-        self.search_type.value.lower()
+
+class BookSortType(BaseModel):
+    sort_type: BookSortTypeEnum = BookSortTypeEnum.title
+
+    # def __init__(self, **data):
+    #     super().__init__(**data)
+    #     self.search_type.value.lower()
+
+
+class BookSortOption(BaseModel):
+    sort_option: BookSortOptionEnum = BookSortOptionEnum.asc
