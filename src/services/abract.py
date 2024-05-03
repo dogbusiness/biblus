@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from uuid import UUID
 
 from models.books import Book, ShortBook
-from models.customs import BookSortOption, BookSortType
 
 
 class BookServiceABC(ABC):
@@ -12,8 +11,8 @@ class BookServiceABC(ABC):
         self,
         author: str | None,
         title: str | None,
-        sort: BookSortType | None = None,
-        sort_option: BookSortOption | None = None,
+        sort: str | None = None,
+        sort_option: str | None = None,
     ) -> list[ShortBook]: ...
 
     @abstractmethod

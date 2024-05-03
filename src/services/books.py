@@ -1,9 +1,8 @@
 from functools import lru_cache
+from typing import Annotated
 from uuid import UUID
 
-from core.pagination import PaginateQueryParams
 from models.books import Book, ShortBook
-from models.customs import BookSortOption, BookSortType
 
 from .abract import BookServiceABC
 
@@ -12,15 +11,16 @@ class BookService(BookServiceABC):
 
     def __init__(self):
         self.storage = None
-        self.manager = None
 
     async def search_book(
         self,
         author: str | None,
         title: str | None,
-        pagination: PaginateQueryParams,
-        sort: BookSortType | None = None,
-        sort_option: BookSortOption | None = None,
+        pagination: Annotated[
+            object, hasattr(object, "page_number"), hasattr(object, "page_size")
+        ],
+        sort: Annotated[object, hasattr(object, "sort_type")] | None = None,
+        sort_option: Annotated[object, hasattr(object, "sort_option")] | None = None,
     ) -> list[ShortBook]:
         pass
 
