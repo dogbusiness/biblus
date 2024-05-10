@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from core.exceptions import EmptyFields
+from core.exceptions import EmptyFields, NotFound
 from core.pagination import PaginateQueryParams
 from models.books import Book, ShortBook
 from models.customs import BookSortOption, BookSortType
@@ -56,12 +56,12 @@ async def get_book(
     book_id: UUID,
     book_service: BookServiceABC = Depends(get_book_service),
 ) -> Book:
-    book = await book_service.get_book_by_id(book_id)
-    if not book:
+    try:
+        return await book_service.get_book_by_id(book_id)
+    except NotFound:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="book not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail=NotFound.detail
         )
-    return book
 
 
 @router.get(
