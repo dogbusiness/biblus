@@ -19,5 +19,5 @@ class Book(ShortBook):
     published_by: Optional[str] = None
     description: Optional[str] = None
     cover: Optional[str] = None
-    download_links: list[dict[Extension, FileUrl] | None]
+    download_links: list[dict[Extension, list[FileUrl]] | None]
     tor_link: dict[Extension, FileUrl] | None

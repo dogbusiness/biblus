@@ -2,6 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
+from core.exceptions import EmptyFields
 from core.pagination import PaginateQueryParams
 from models.books import Book, ShortBook
 from models.customs import BookSortOption, BookSortType
@@ -28,8 +29,14 @@ async def search_book(
     sort_option: BookSortOption | None = None,
     book_service: BookServiceABC = Depends(get_book_service),
 ) -> list[ShortBook]:
-    # Полнотекстовый поиск ????
-    return await book_service.search_book(author, title, pagination, sort, sort_option)
+    try:
+        return await book_service.search_book(
+            author, title, pagination, sort, sort_option
+        )
+    except EmptyFields:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=EmptyFields.detail
+        )
 
 
 @router.get(

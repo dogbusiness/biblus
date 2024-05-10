@@ -7,14 +7,18 @@ class StorageABC(ABC):
 
     @abstractmethod
     async def get_object_by_id(  # noqa: E704
+        self,
+        table: str,
         id: UUID,
-    ) -> Iterable[Mapping[str, Hashable]] | Iterable[None]: ...
+    ) -> Mapping[str, Hashable] | None: ...
 
     @abstractmethod
     async def search_objects(  # noqa: E704
+        self,
+        table: str,
         fields_and_values: dict[str, Hashable],
         objects_per_page: int,
         page: int,
         order_by: str | None,
         order_option: str | None,
-    ) -> Mapping[str, Hashable] | None: ...
+    ) -> Iterable[Mapping[str, Hashable]] | Iterable[None]: ...
