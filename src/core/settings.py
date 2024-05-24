@@ -4,8 +4,8 @@ from pydantic_settings import BaseSettings
 
 class ServiceSettings(BaseSettings):
 
-    project_name: str = "Biblus"
-    project_port: int = 228
+    app_name: str = "Biblus"
+    app_port: int = 1228
 
     elastic_host: str = Field("elasticsearch", env="ELASTIC_HOST")
     elastic_port: int = Field(5601, env="ELASTIC_PORT")

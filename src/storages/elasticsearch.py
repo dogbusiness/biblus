@@ -12,7 +12,7 @@ from .abstract import StorageABC
 class ElasticStorage(StorageABC):
 
     @asynccontextmanager
-    async def call_client(self) -> AsyncGenerator[AsyncElasticsearch]:
+    async def call_client(self) -> AsyncGenerator[AsyncElasticsearch, None]:
         client = AsyncElasticsearch(
             settings.elastic_url,
             basic_auth=(settings.elastic_user, settings.elastic_password),

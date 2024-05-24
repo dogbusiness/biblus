@@ -2,4 +2,6 @@ requests
 bs4
 lxml
 pydantic
+pydantic_settings
 fastapi
+elasticsearch
