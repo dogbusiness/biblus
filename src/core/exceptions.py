@@ -10,3 +10,10 @@ class NotFound(Exception):
     def __init__(self):
         super().__init__(self)
         self.detail = "object(s) not found"
+
+
+class StreamFail(Exception):
+
+    def __init__(self):
+        super().__init__(self)
+        self.detail = "file download has failed"

@@ -1,8 +1,8 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, responses
 
-from core.exceptions import EmptyFields, NotFound
+from core.exceptions import EmptyFields, NotFound, StreamFailed
 from core.pagination import PaginateQueryParams
 from models.books import Book, ShortBook
 from models.customs import BookSortOption, BookSortType
@@ -80,11 +80,16 @@ async def get_book(
 async def download_book(
     book_id: UUID,
     book_service: BookServiceABC = Depends(get_book_service),
-) -> Book:
-    book = await book_service.download_book_by_id(book_id)
-    if not book:
+) -> responses.StreamingResponse:
+    try:
+        book_link, func = await book_service.download_book_by_id(book_id)
+    except NotFound:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="book not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail=NotFound.detail
         )
-    # пока не знаю как возвращать - файл или что-то еще
-    return book
+    try: 
+        return responses.StreamingResponse(func(book_link), media_type="text/event-stream")
+    except StreamFailed:
+        raise HTTPException(
+            status_code=status.HTTP_424_FAILED_DEPENDENCY, detail=StreamFailed.detail
+        )
