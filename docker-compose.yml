@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+
+  elasticsearch:
+    image: elasticsearch:8.13.0
+    ports:
+      - "5601:5601"
+    env_file:
+      - "./.envs/elastic"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    environment:
+      - xpack.security.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+    volumes:
+      - ./.envs/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    healthcheck:
+      test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    command: ./.envs/elasticinitial.sh  # settings up indices
