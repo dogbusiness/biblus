@@ -1,20 +1,22 @@
 from functools import lru_cache
-from typing import Annotated
+from typing import Annotated, Callable, AsyncGenerator, Sequence
 from uuid import UUID
 
 from core.exceptions import EmptyFields, NotFound
 from core.settings import settings
 from models.books import Book, ShortBook
+from io_file_managers.abstract import IOFileManagerABC
+from io_file_managers.managers import IOTorFileManager
 from storages.abstract import StorageABC
 from storages.elasticsearch import ElasticStorage
-
 from .abract import BookServiceABC
 
 
 class BookService(BookServiceABC):
 
-    def __init__(self, storage: StorageABC):
+    def __init__(self, storage: StorageABC, file_manager: IOFileManagerABC):
         self.storage = storage
+        self.file_manager = file_manager
 
     async def search_book(
         self,
@@ -53,10 +55,15 @@ class BookService(BookServiceABC):
 
     async def download_book_by_id(
         self, book_id: UUID
-    ) -> Book:  # не уверен будем отдавать именно Book
-        pass
-
+    ) -> Sequence[str, Callable[[str], AsyncGenerator[bytes, None, None]]]:
+        book = await self.get_book_by_id(book_id)
+        if not book:
+            raise NotFound()
+        book_link = book.model_dump()[settings.book_dwld_option_field]
+        if not book_link:
+            raise NotFound()
+        return book_link, self.file_manager.stream_file
 
 @lru_cache
 def get_book_service() -> BookService:
-    return BookService(storage=ElasticStorage())
+    return BookService(storage=ElasticStorage(), file_manager=IOTorFileManager())
