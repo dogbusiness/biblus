@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
-from typing import AsyncGenerator, IO, Any
+from typing import IO, Any, AsyncGenerator
 
 
 class IOFileManagerABC(ABC):
 
     @abstractmethod
-    async def download_file(self, path: str) -> None:
-        ...
+    async def download_file(self, path: str) -> None: ...  # noqa: E704
 
     @abstractmethod
-    async def stream_file(self, path: str) -> AsyncGenerator[IO[Any], None, None]:
-        ...
+    async def stream_file(  # noqa: E704
+        self, path: str
+    ) -> AsyncGenerator[IO[Any], None, None]: ...

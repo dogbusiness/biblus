@@ -1,14 +1,15 @@
 from functools import lru_cache
-from typing import Annotated, Callable, AsyncGenerator, Sequence
+from typing import Annotated, AsyncGenerator, Callable, Sequence
 from uuid import UUID
 
 from core.exceptions import EmptyFields, NotFound
 from core.settings import settings
-from models.books import Book, ShortBook
 from io_file_managers.abstract import IOFileManagerABC
 from io_file_managers.managers import IOTorFileManager
+from models.books import Book, ShortBook
 from storages.abstract import StorageABC
 from storages.elasticsearch import ElasticStorage
+
 from .abract import BookServiceABC
 
 
@@ -63,6 +64,7 @@ class BookService(BookServiceABC):
         if not book_link:
             raise NotFound()
         return book_link, self.file_manager.stream_file
+
 
 @lru_cache
 def get_book_service() -> BookService:

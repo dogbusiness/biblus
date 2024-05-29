@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status, responses
+from fastapi import APIRouter, Depends, HTTPException, responses, status
 
 from core.exceptions import EmptyFields, NotFound, StreamFailed
 from core.pagination import PaginateQueryParams
@@ -87,8 +87,10 @@ async def download_book(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=NotFound.detail
         )
-    try: 
-        return responses.StreamingResponse(func(book_link), media_type="text/event-stream")
+    try:
+        return responses.StreamingResponse(
+            func(book_link), media_type="text/event-stream"
+        )
     except StreamFailed:
         raise HTTPException(
             status_code=status.HTTP_424_FAILED_DEPENDENCY, detail=StreamFailed.detail
