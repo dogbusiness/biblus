@@ -56,7 +56,7 @@ class BookService(BookServiceABC):
 
     async def download_book_by_id(
         self, book_id: UUID
-    ) -> Sequence[str, Callable[[str], AsyncGenerator[bytes, None, None]]]:
+    ) -> tuple[Callable[[str], AsyncGenerator[bytes, None]]]:
         book = await self.get_book_by_id(book_id)
         if not book:
             raise NotFound()

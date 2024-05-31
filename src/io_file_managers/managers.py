@@ -29,7 +29,7 @@ class IOTorFileManager(IOFileManagerABC):
                     ):
                         await f.write(chunk)
 
-    async def stream_file(self, url: str) -> AsyncGenerator[bytes, None, None]:
+    async def stream_file(self, url: str) -> AsyncGenerator[bytes, None]:
         socks_conn = ProxyConnector(host=settings.proxy_host, port=settings.proxy_port)
         async with aiohttp.ClientSession(connector=socks_conn) as tor_session:
             async with tor_session.get(url, headers=self.headers):

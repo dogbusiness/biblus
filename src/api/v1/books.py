@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, responses, status
 
-from core.exceptions import EmptyFields, NotFound, StreamFailed
+from core.exceptions import EmptyFields, NotFound, StreamFail
 from core.pagination import PaginateQueryParams
 from models.books import Book, ShortBook
 from models.customs import BookSortOption, BookSortType
@@ -91,7 +91,7 @@ async def download_book(
         return responses.StreamingResponse(
             func(book_link), media_type="text/event-stream"
         )
-    except StreamFailed:
+    except StreamFail:
         raise HTTPException(
-            status_code=status.HTTP_424_FAILED_DEPENDENCY, detail=StreamFailed.detail
+            status_code=status.HTTP_424_FAILED_DEPENDENCY, detail=StreamFail.detail
         )

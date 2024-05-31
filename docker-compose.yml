@@ -16,13 +16,14 @@ services:
       - xpack.security.enabled=false
       - xpack.security.transport.ssl.enabled=false
     volumes:
-      - ./.envs/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./envs/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./envs/elasticinitial.sh:/usr/share/elasticsearch/envs/elasticinitial.sh
     healthcheck:
       test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:5601 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
       interval: 30s
       timeout: 10s
       retries: 5
-    command: ./.envs/elasticinitial.sh  # settings up indices
+    #command: ./envs/elasticinitial.sh  # settings up indices
 
   biblus:
     build:

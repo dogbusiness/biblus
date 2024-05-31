@@ -4,4 +4,28 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+# installing tor
+
+apt-get update && apt-get upgrade
+apt-get install apt-utils
+apt-get update && apt-get upgrade
+apt-cache search '^gnupg?'
+apt-get -y install gnupg2
+apt-get upgrade
+apt-get update
+apt-get install ca-certificates
+
+apt-get -y install apt-transport-https \
+  # lsb_release -c \
+  rel=$(cat /etc/debian_version) \
+  arch=$(dpkg --print-architecture) \
+  # arrIN=(${rel//:/ }) && release=(${arrIN[1]}) \
+  echo "deb     [arch=$arch signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $rel main" > /etc/apt/sources.list.d/tor.list \
+  echo "deb-src [arch=$arch signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $rel main" > /etc/apt/sources.list.d/tor.list \
+  wget --no-check-certificate -qO - https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null \
+  apt-get upgrade \
+  apt-get update \
+  apt-get install tor deb.torproject.org-keyring \
+  tor --version
+
 python main.py
