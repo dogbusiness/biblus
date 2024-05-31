@@ -7,7 +7,6 @@ from fastapi.responses import ORJSONResponse
 from api.v1 import books
 from core.settings import settings
 
-
 # @asynccontextmanager
 # async def lifespan(app: FastAPI):
 #     # start taking requests
