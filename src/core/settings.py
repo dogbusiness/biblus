@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings
 class ServiceSettings(BaseSettings):
 
     app_name: str = "Biblus"
-    app_port: int = 1228
+    app_port: int = 8000
 
     proxy_host: str = "127.0.0.1"
     proxy_port: int = 9050

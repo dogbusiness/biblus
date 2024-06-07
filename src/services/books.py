@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import Annotated, AsyncGenerator, Callable, Sequence
+from typing import Annotated, AsyncGenerator, Callable
 from uuid import UUID
 
 from core.exceptions import EmptyFields, NotFound

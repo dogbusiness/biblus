@@ -25,6 +25,16 @@ services:
       retries: 5
     #command: ./envs/elasticinitial.sh  # settings up indices
 
+  tor:
+    container_name: tor
+    image: dockurr/tor
+    ports:
+      - 9050:9050
+      - 9051:9051
+    volumes:
+      - ./tor/torrc:/etc/tor/torrc
+    stop_grace_period: 1m
+
   biblus:
     build:
       context: .
@@ -33,6 +43,7 @@ services:
       - ./envs/biblus
     depends_on:
       - elasticsearch
+      - tor
     expose:
       - "8000"
     command: "/start"
