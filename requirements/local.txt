@@ -1,0 +1,8 @@
+pydantic
+pydantic_settings
+fastapi
+elasticsearch
+aiohttp==3.9.5
+aiofiles==23.2.1
+aiohttp_socks==0.8.4
+stem==1.8.2
