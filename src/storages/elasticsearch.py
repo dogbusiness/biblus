@@ -3,6 +3,7 @@ from typing import Any, AsyncGenerator
 from uuid import UUID
 
 from elasticsearch import AsyncElasticsearch
+from fastapi_cache.decorator import cache
 
 from core.settings import settings
 
@@ -28,6 +29,7 @@ class ElasticStorage(StorageABC):
         else:
             return []
 
+    @cache(expire=settings.cache_expire)
     async def get_object_by_id(  # noqa: E704
         self,
         table: str,
@@ -35,6 +37,7 @@ class ElasticStorage(StorageABC):
     ) -> dict[str, Any] | None:
         return await self.call_client().get_source(index=table, id=id)
 
+    @cache(expire=settings.cache_expire)
     async def search_objects(  # noqa: E704
         self,
         table: str,
