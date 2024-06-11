@@ -65,8 +65,9 @@ jobs:
         with:
           file: "./compose/Dockerfile"
           push: ${{ github.event_name != 'pull_request' }}
+          env: GITHUB_TOKEN: ${{ github.token }}
           # tags: |
-          #   ghcr.io/stranded-in-python/movix-ugc-api:latest
+          #   ghcr.io/yegres280/biblus:latest
 
-          labels: |
-            maintainer=${{ github.actor }}
+          # labels: |
+          #   maintainer=${{ github.actor }}
