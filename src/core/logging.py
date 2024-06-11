@@ -78,4 +78,5 @@ def get_logger():
     logger = logging.getLogger(__file__)
     return logger
 
+
 logger = get_logger()

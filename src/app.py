@@ -8,8 +8,9 @@ from fastapi_cache.backends.redis import RedisBackend
 from redis import asyncio as aioredis
 
 from api.v1 import books
-from core.settings import settings
 from core.logging import logger
+from core.settings import settings
+
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
