@@ -11,6 +11,11 @@ class ServiceSettings(BaseSettings):
     proxy_port: int = 9050
     chunk_size: int = 1024
 
+    redis_host: str = Field("redis://redis", env="REDIS_HOST")
+    redis_port: int = Field(6380, env="REDIS_PORT")
+    redis_url: str = Field(f"{redis_host}:{redis_port}")
+    cache_expire: int = Field(600)
+
     elastic_host: str = Field("elasticsearch", env="ELASTIC_HOST")
     elastic_port: int = Field(5601, env="ELASTIC_PORT")
     elastic_user: str = Field("elastic", env="ELASTIC_USER")

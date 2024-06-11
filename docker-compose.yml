@@ -35,6 +35,11 @@ services:
       - ./tor/torrc:/etc/tor/torrc
     stop_grace_period: 1m
 
+  redis:
+    image: redis:7.2-rc-bullseye
+    ports:
+      - "6380:6380"
+
   biblus:
     build:
       context: .
@@ -44,6 +49,7 @@ services:
     depends_on:
       - elasticsearch
       - tor
+      - redis
     expose:
       - "8000"
     command: "/start"
