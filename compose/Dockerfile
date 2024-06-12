@@ -18,6 +18,8 @@ COPY ./requirements .
 
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
+  ls \
+  echo ${BUILD_ENVIRONMENT} \
   -r ${BUILD_ENVIRONMENT}.txt
 
 
