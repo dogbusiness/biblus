@@ -8,6 +8,7 @@ from fastapi_cache.backends.redis import RedisBackend
 from redis import asyncio as aioredis
 
 from api.v1 import books
+from core.logging import logger
 from core.settings import settings
 
 
@@ -15,6 +16,7 @@ from core.settings import settings
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     redis = aioredis.from_url(settings.redis_host, port=settings.redis_port)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    logger.info("Success")
     yield
 
 
