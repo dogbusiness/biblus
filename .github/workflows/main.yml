@@ -13,6 +13,9 @@ on:
     paths-ignore: ["docs/**"]
 
   push:
+    branches:
+    - master
+    - main
     paths-ignore: ["docs/**"]
 
   workflow_dispatch:
