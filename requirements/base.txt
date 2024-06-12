@@ -1,0 +1,10 @@
+pydantic==2.7.1
+pydantic_settings==2.2.1
+fastapi==0.111.0
+elasticsearch==8.13.2
+aiohttp==3.9.5
+aiofiles==23.2.1
+aiohttp_socks==0.8.4
+pre-commit==3.0.4
+fastapi-cache2[redis]==0.2.1
+logging==0.4.9.6
