@@ -7,11 +7,12 @@ env:
 
 on:
   pull_request:
-    branches: ["master", "main"]
+    branches:
+    - master
+    - main
     paths-ignore: ["docs/**"]
 
   push:
-    branches: ["master", "main"]
     paths-ignore: ["docs/**"]
 
   workflow_dispatch:
@@ -45,7 +46,6 @@ jobs:
   builder-biblus:
     environment: production
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
     needs:
       - linter
     steps:
