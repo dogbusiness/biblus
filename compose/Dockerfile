@@ -16,10 +16,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
 
+RUN ls \
+    echo ${BUILD_ENVIRONMENT}
+
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
-  ls \
-  echo ${BUILD_ENVIRONMENT} \
   -r ${BUILD_ENVIRONMENT}.txt
 
 
