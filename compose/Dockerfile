@@ -8,21 +8,15 @@ FROM python as python-build-stage
 
 ARG BUILD_ENVIRONMENT=production
 
-ARG APP_HOME=/app
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV BUILD_ENV ${BUILD_ENVIRONMENT}
-
-WORKDIR ${APP_HOME}
-
 # Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
-  build-essential
+  build-essential \
+  # psycopg2 dependencies
+  libpq-dev
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
-
 
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
@@ -59,11 +53,9 @@ COPY ./compose/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
-COPY ./compose/start /start
-RUN sed -i 's/\r$//g' /start
-RUN chmod +x /start
-
+# copy application code to WORKDIR
 COPY ./src ${APP_HOME}
 
 EXPOSE 8000
+
 ENTRYPOINT ["/start"]
