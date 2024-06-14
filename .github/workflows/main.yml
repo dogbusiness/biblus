@@ -103,4 +103,4 @@ jobs:
           python3.11 -m venv .venv
           source .venv/bin/activate
           pip install pytest pytest-cov pytest-asyncio
-          pytest src/tests/tests.py -W ignore::DeprecationWarning --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          pytest src/tests/tests.py -W ignore::DeprecationWarning --doctest-modules --junitxml=junit/test-results.xml --cov=src/tests/ --cov-report=xml --cov-report=html
