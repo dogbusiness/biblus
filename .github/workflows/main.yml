@@ -75,6 +75,7 @@ jobs:
 
   testing:
     environment: production
+    runs-on: ubuntu-latest
     needs:
       - builder-biblus
     steps:
