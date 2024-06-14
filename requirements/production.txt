@@ -8,3 +8,5 @@ aiohttp==3.9.5
 aiofiles==23.2.1
 aiohttp_socks==0.8.4
 fastapi-cache2[redis]==0.2.1
+pytest==8.2.2
+pytest-mock==3.14.0

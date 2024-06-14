@@ -68,8 +68,8 @@ async def get_book(
 @router.get(
     "/download/{book_id}/",
     response_model=Book,
-    summary="Get book by id",
-    description="Get information about book by book_id",
+    summary="Download book by id",
+    description="Download a book by book_id",
     response_description="book_id is from POST /search-book/",
     responses={
         status.HTTP_401_UNAUTHORIZED: {
