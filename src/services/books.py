@@ -41,8 +41,8 @@ class BookService(BookServiceABC):
             fields,
             pagination.page_size,
             pagination.page_number,
-            sort.sort_type,
-            sort_option.sort_option,
+            sort.sort_type if sort else None,
+            sort_option.sort_option if sort_option else None,
         )
         if books == []:
             raise NotFound()

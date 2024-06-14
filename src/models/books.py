@@ -1,7 +1,6 @@
-import datetime
 from typing import Optional
 
-from pydantic import FileUrl
+from pydantic import HttpUrl
 
 from .customs import Extension
 from .mixins import BookIdMixin
@@ -10,7 +9,7 @@ from .mixins import BookIdMixin
 class ShortBook(BookIdMixin):
     title: str
     author: str
-    year: datetime.datetime
+    year: int
     pages: Optional[int]
 
 
@@ -19,5 +18,5 @@ class Book(ShortBook):
     published_by: Optional[str] = None
     description: Optional[str] = None
     cover: Optional[str] = None
-    download_links: list[dict[Extension, list[FileUrl]] | None]
-    tor_link: dict[Extension, FileUrl] | None
+    download_links: list[dict[Extension, list[HttpUrl]] | None]
+    tor_link: dict[Extension, HttpUrl] | None
