@@ -79,4 +79,4 @@ The service for finding and dowloading books using **Onion Network**.
 ```
 
 ## License
-This project is licensed under the [Open Software License 3.0](LICENSE)
+This project is licensed under the [MIT](LICENSE)
