@@ -29,6 +29,7 @@ The service for finding and dowloading books using **Onion Network**.
 ![redis](https://img.shields.io/badge/redis%20-%23CC0000.svg?&style=for-the-badge&logo=redis&logoColor=white)
 ![ElasticSearch](https://img.shields.io/badge/-ElasticSearch-005571?style=for-the-badge&logo=elasticsearch)
 ![TOR](https://img.shields.io/badge/-Tor-7D4698?style=for-the-badge&logo=torbrowser)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=fff)
 
 ## DEMO
 ### Downloading Demo
