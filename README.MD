@@ -4,6 +4,20 @@
 The service for finding and dowloading books using **Onion Network**.
 
 
+## Table of Contents
+- [Biblus](#biblus)
+  - [Table of Contents](#table-of-contents)
+  - [Technology Stack](#technology-stack)
+  - [DEMO](#demo)
+    - [Downloading Demo](#downloading-demo)
+    - [Get Methods Demo](#get-methods-demo)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [Docker Compose installation:](#docker-compose-installation)
+    - [Local installation](#local-installation)
+  - [Usage](#usage)
+  - [License](#license)
+
 ## Technology Stack
 ![nginx](https://img.shields.io/badge/nginx-green.svg?&style=for-the-badge&logo=nginx&logoColor=white)
 ![docker](https://img.shields.io/badge/docker-%232496ED.svg?&style=for-the-badge&logo=docker&logoColor=white)
@@ -16,20 +30,12 @@ The service for finding and dowloading books using **Onion Network**.
 ![ElasticSearch](https://img.shields.io/badge/-ElasticSearch-005571?style=for-the-badge&logo=elasticsearch)
 ![TOR](https://img.shields.io/badge/-Tor-7D4698?style=for-the-badge&logo=torbrowser)
 
+## DEMO
+### Downloading Demo
+![Dowloading](/materials/downloading.gif)
 
-
-## Table of Contents
-- [Biblus](#biblus)
-  - [Technology Stack](#technology-stack)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Installation](#installation)
-    - [Docker Compose installation:](#docker-compose-installation)
-    - [Local installation](#local-installation)
-  - [Usage](#usage)
-  - [DEMO](#demo)
-  - [License](#license)
-
+### Get Methods Demo
+![Get_methods:Books](/materials/get_books.gif)
 
 ## Features
 1. API built with **FastAPI**
@@ -70,10 +76,6 @@ The service for finding and dowloading books using **Onion Network**.
 ``` bash
  cd src && python main.py
 ```
-
-## DEMO
-
-
 
 ## License
 This project is licensed under the [Open Software License 3.0](LICENSE)
