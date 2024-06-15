@@ -55,15 +55,15 @@ class BookService(BookServiceABC):
         return Book(**book)
 
     async def download_book_by_id(
-        self, book_id: UUID
+        self, book_id: UUID, fmt: str
     ) -> tuple[Callable[[str], AsyncGenerator[bytes, None]]]:
         book = await self.get_book_by_id(book_id)
         if not book:
             raise NotFound()
-        book_link = book.model_dump()[settings.book_dwld_option_field]
+        book_link = book.model_dump()[settings.book_dwld_option_field].get(fmt)
         if not book_link:
             raise NotFound()
-        return book_link, self.file_manager.stream_file
+        return str(book_link), self.file_manager.stream_file
 
 
 @lru_cache

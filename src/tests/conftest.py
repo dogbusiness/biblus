@@ -48,5 +48,7 @@ GET_BOOK_BY_ID_SUCCESS = {
     "description": "Crime and Punishment follows the mental anguish and moral dilemmas of Rodion Raskolnikov, an impoverished ex-student in Saint Petersburg who plans to kill an unscrupulous pawnbroker, an old woman who stores money and valuable objects in her flat.",
     "cover": "https://en.wikipedia.org/wiki/Crime_and_Punishment#/media/File:Crimeandpunishmentcover.png",
     "download_links": [{".pdf": ["https://somelink.com/crime_punish.pdf"]}],
-    "tor_link": {".pdf": "http://someonionlink.onion/crime_punish.pdf"},
+    "tor_link": {
+        ".pdf": "http://libgenfrialc7tguyjywa36vtrdcplwpxaw43h6o63dmmwhvavo5rqqd.onion/LG/0447000/f67efa147708e1e007638075acd7863b/Fyodor%20Dostoyevsky%20-%20Crimen%20Y%20Castigo%20%20%20Crime%20and%20Punishment%20%28Literatura%20%20%20Literature%29%20%28Spanish%20Edition%29-Alianza%20%282006%29.pdf"
+    },
 }

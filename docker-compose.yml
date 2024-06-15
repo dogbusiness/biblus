@@ -32,7 +32,7 @@ services:
       - 9050:9050
       - 9051:9051
     volumes:
-      - ./tor/torrc:/etc/tor/torrc
+      - ./tor/torrcs/torrc:/etc/tor/torrc
     stop_grace_period: 1m
 
   redis:

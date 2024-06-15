@@ -80,20 +80,22 @@ async def get_book(
 )
 async def download_book(
     book_id: UUID,
+    format: str,
     book_service: BookServiceABC = Depends(get_book_service),
 ) -> responses.StreamingResponse:
     try:
-        book_link, func = await book_service.download_book_by_id(book_id)
+        book_link, func = await book_service.download_book_by_id(book_id, format)
     except NotFound:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=NotFound.detail
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Such book or format not found",
         )
     try:
         return responses.StreamingResponse(
             func(book_link), media_type="text/event-stream"
         )
     except StreamFail:
-        logger.error(f"StreamFail:{StreamFail.detail}")
+        logger.error(f"StreamFail:{StreamFail}")
         raise HTTPException(
-            status_code=status.HTTP_424_FAILED_DEPENDENCY, detail=StreamFail.detail
+            status_code=status.HTTP_424_FAILED_DEPENDENCY, detail="Download interrupted"
         )

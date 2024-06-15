@@ -32,10 +32,8 @@ class IOTorFileManager(IOFileManagerABC):
     async def stream_file(self, url: str) -> AsyncGenerator[bytes, None]:
         socks_conn = ProxyConnector(host=settings.proxy_host, port=settings.proxy_port)
         async with aiohttp.ClientSession(connector=socks_conn) as tor_session:
-            async with tor_session.get(url, headers=self.headers):
-                async for chunk in tor_session.content.iter_chunked(
-                    settings.chunk_size
-                ):
+            async with tor_session.get(url, headers=self.headers) as response:
+                async for chunk in response.content.iter_chunked(settings.chunk_size):
                     try:
                         yield chunk
                     except Exception:
